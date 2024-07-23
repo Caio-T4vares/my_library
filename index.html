@@ -9,8 +9,24 @@
 </head>
 
 <body>
+  <header>
+    <h1>My library</h1>
+  </header>
+  <main>
+    <!--Filtrar é uma dropdown -->
+    <label for="order">Order by</label>
+    <select name="order" id="order">
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+    <button class="addBtn" type="button">Add book</button>
+    <div class="card-container">
 
-
+    </div>
+  </main>
+  <footer>
+    <span>Made by: <a href="https://github.com/Caio-T4vares">Caio Vinícius</a></span>
+  </footer>
 
   <script defer src="./script.js"></script>
 </body>
