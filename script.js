@@ -8,5 +8,11 @@ function Book(title, author, numberOfPages, hasBeenRead) {
 Book.prototype.changeStatus = function () {
   this.hasBeenRead = !this.hasBeenRead;
 };
+
+const container = document.querySelector(".card-container");
+const addBtn = document.querySelector(".addBtn");
+addBtn.addEventListener("click", (event) => {
+  console.log("Clicked");
+});
 function addBook() {}
 function removeBook() {}
