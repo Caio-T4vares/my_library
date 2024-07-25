@@ -143,3 +143,12 @@ input[type="file"] {
   color: red;
   cursor: pointer;
 }
+.card span {
+  font-weight: bold;
+}
+.read {
+  color: green;
+}
+.not-read {
+  color: red;
+}

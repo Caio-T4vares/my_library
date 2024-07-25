@@ -48,8 +48,16 @@ function loadBooks(books) {
     const numberOfPages = document.createElement("p");
     numberOfPages.textContent = `${book.numberOfPages} pages`;
     const bookStatus = document.createElement("p");
-    if (book.hasBeenRead) bookStatus.textContent = "read? yes";
-    else bookStatus.textContent = "read? no";
+    bookStatus.textContent = "read?";
+    const spanStatus = document.createElement("span");
+    if (book.hasBeenRead) {
+      spanStatus.textContent = " yes";
+      spanStatus.classList.add("read");
+    } else {
+      spanStatus.textContent = " no";
+      spanStatus.classList.add("not-read");
+    }
+    bookStatus.appendChild(spanStatus);
     descContainer.appendChild(author);
     descContainer.appendChild(numberOfPages);
     descContainer.appendChild(bookStatus);
@@ -62,14 +70,28 @@ function loadBooks(books) {
     const changeStatusBtn = document.createElement("button");
     changeStatusBtn.classList.add("btn", "changeStatus-btn");
     changeStatusBtn.textContent = "Mark as read";
+    changeStatusBtn.addEventListener("click", (event) => {
+      const bookStatusSpan = newCard.querySelector("span");
+      console.log("changing");
+      book.changeStatus();
+      if (book.hasBeenRead) {
+        console.log("uhul");
+        bookStatus.classList.remove("not-read");
+        bookStatusSpan.textContent = " yes";
+        bookStatusSpan.classList.add("read");
+      } else {
+        console.log("uhul 2");
+        bookStatus.classList.remove("read");
+        bookStatusSpan.textContent = " no";
+        bookStatusSpan.classList.add("not-read");
+      }
+    });
+
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("btn", "remove-btn");
     removeBtn.textContent = "Remove";
     removeBtn.addEventListener("click", (event) => {
-      const card =
-        event.target.parentNode
-          .parentNode; /* Elemento Card, pai de da div.btns */
-      container.removeChild(card);
+      container.removeChild(newCard);
       const title = container.querySelector(".title");
       booksArr = booksArr.filter((book) => book.title !== title.textContent);
     });
