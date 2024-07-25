@@ -17,6 +17,11 @@ addBtn.addEventListener("click", (event) => {
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
 });
+const closeModalBtn = document.querySelector(".closeBtn");
+closeModalBtn.addEventListener("click", (event) => {
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+});
 
 function addBook() {}
 function removeBook() {}

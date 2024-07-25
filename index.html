@@ -28,6 +28,8 @@
         <input type="checkbox" name="book-status" id="book-status">
       </div>
       <input type="file" name="" id="" accept="image/*">
+      <button type="button" class="btn confirm-add">Confirm</button>
+      <button class="closeBtn">X</button>
     </form>
   </div>
   <div class="overlay hidden"></div>
@@ -44,15 +46,17 @@
     <button class="addBtn" type="button">Add book</button>
     <div class="card-container">
       <div class="card">
-        <img src="./images/default.jpg" alt="Imagem de uma nebula">
-        <p class="title">Perdido em marte</p>
-        <div class="desc">
-          <p>by Andy Weir</p>
-          <p>392 pages</p>
+        <!-- <img src="./images/default.jpg" alt="Imagem de uma nebula"> -->
+        <div class="info">
+          <p class="title">Perdido em marte</p>
+          <div class="desc">
+            <p>by Andy Weir</p>
+            <p>392 pages</p>
+          </div>
         </div>
         <div class="btns">
-          <button type="button" class="changeStatus-btn">Already read?</button>
-          <button type="button" class="remove-btn">Remove</button>
+          <button type="button" class="btn changeStatus-btn">Already read?</button>
+          <button type="button" class="btn remove-btn">Remove</button>
         </div>
       </div>
 
