@@ -35,7 +35,8 @@ const confirmBtn = document.querySelector(".confirm-add");
 confirmBtn.addEventListener("click", (event) => {});
 function removeBook(event) {}
 function loadBooks(books) {
-  for (book in books) {
+  console.log(books);
+  for (book of books) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
     const cardInfo = document.createElement("div");
@@ -48,10 +49,10 @@ function loadBooks(books) {
     const descContainer = document.createElement("div");
     descContainer.classList.add("desc");
     const author = document.createElement("p");
-    author.textContent = book.author;
+    author.textContent = `by ${book.author}`;
     console.log(book.author);
     const numberOfPages = document.createElement("p");
-    numberOfPages.textContent = book.numberOfPages;
+    numberOfPages.textContent = `${book.numberOfPages} pages`;
     const bookStatus = document.createElement("p");
     if (book.hasBeenRead) bookStatus.textContent = "read? yes";
     else bookStatus.textContent = "read? no";
