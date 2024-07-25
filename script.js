@@ -8,7 +8,7 @@ function Book(title, author, numberOfPages, hasBeenRead) {
 Book.prototype.changeStatus = function () {
   this.hasBeenRead = !this.hasBeenRead;
 };
-const booksArr = [
+let booksArr = [
   new Book("Perdido em marte", "Andy Weir", 332, false),
   new Book("Example2", "Unkown", 999, true),
   new Book("Example3", "John Doe", 222, false),
@@ -30,12 +30,7 @@ closeModalBtn.addEventListener("click", (event) => {
   overlay.classList.add("hidden");
 });
 
-const removeBtn = document.querySelector("remove-btn");
-const confirmBtn = document.querySelector(".confirm-add");
-confirmBtn.addEventListener("click", (event) => {});
-function removeBook(event) {}
 function loadBooks(books) {
-  console.log(books);
   for (book of books) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
@@ -50,7 +45,6 @@ function loadBooks(books) {
     descContainer.classList.add("desc");
     const author = document.createElement("p");
     author.textContent = `by ${book.author}`;
-    console.log(book.author);
     const numberOfPages = document.createElement("p");
     numberOfPages.textContent = `${book.numberOfPages} pages`;
     const bookStatus = document.createElement("p");
@@ -71,12 +65,20 @@ function loadBooks(books) {
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("btn", "remove-btn");
     removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", (event) => {
+      const card =
+        event.target.parentNode
+          .parentNode; /* Elemento Card, pai de da div.btns */
+      container.removeChild(card);
+      const title = container.querySelector(".title");
+      booksArr = booksArr.filter((book) => book.title !== title.textContent);
+    });
 
     buttons.appendChild(changeStatusBtn);
     buttons.appendChild(removeBtn);
-
     newCard.appendChild(cardInfo);
     newCard.appendChild(buttons);
+
     container.appendChild(newCard);
   }
 }
