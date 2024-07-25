@@ -4,11 +4,13 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   gap: 16px;
   background-color: #475569;
+  position: relative;
 }
 body > * {
   padding: 0px 8px;
@@ -37,9 +39,10 @@ a:hover {
   height: 95%;
   border: 1px solid #1e293b;
   display: grid;
-  grid-template-rows: repeat(3, 300px);
+  overflow-y: scroll;
+  grid-template-rows: repeat(2, 300px);
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 8px;
+  gap: 12px;
   margin: 12px 0px;
   padding: 12px;
   justify-content: space-around;
@@ -68,4 +71,48 @@ a:hover {
 }
 .btns > * {
   flex: 1;
+}
+.modal {
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: #0f172a;
+  z-index: 2;
+}
+.hidden {
+  display: none;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+form {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+form > * {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+form label {
+  flex-basis: 120px;
+}
+form > div input {
+  height: 20px;
 }

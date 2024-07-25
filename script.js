@@ -11,8 +11,12 @@ Book.prototype.changeStatus = function () {
 
 const container = document.querySelector(".card-container");
 const addBtn = document.querySelector(".addBtn");
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
 addBtn.addEventListener("click", (event) => {
-  console.log("Clicked");
+  modal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
 });
+
 function addBook() {}
 function removeBook() {}
