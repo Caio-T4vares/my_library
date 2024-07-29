@@ -72,16 +72,13 @@ function loadBooks(books) {
     changeStatusBtn.textContent = "Mark as read";
     changeStatusBtn.addEventListener("click", (event) => {
       const bookStatusSpan = newCard.querySelector("span");
-      console.log("changing");
       book.changeStatus();
       if (book.hasBeenRead) {
-        console.log("uhul");
-        bookStatus.classList.remove("not-read");
+        bookStatusSpan.classList.remove("not-read");
         bookStatusSpan.textContent = " yes";
         bookStatusSpan.classList.add("read");
       } else {
-        console.log("uhul 2");
-        bookStatus.classList.remove("read");
+        bookStatusSpan.classList.remove("read");
         bookStatusSpan.textContent = " no";
         bookStatusSpan.classList.add("not-read");
       }
