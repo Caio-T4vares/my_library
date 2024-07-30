@@ -28,76 +28,100 @@ const closeModalBtn = document.querySelector(".close-btn");
 closeModalBtn.addEventListener("click", (event) => {
   modal.classList.add("hidden");
   overlay.classList.add("hidden");
+  document.querySelector("form").reset();
+  event.preventDefault();
 });
 
 function loadBooks(books) {
   for (book of books) {
-    const newCard = document.createElement("div");
-    newCard.classList.add("card");
-    const cardInfo = document.createElement("div");
-    cardInfo.classList.add("info");
-
-    const bookName = document.createElement("p");
-    bookName.textContent = book.title;
-    bookName.classList.add("title");
-
-    const descContainer = document.createElement("div");
-    descContainer.classList.add("desc");
-    const author = document.createElement("p");
-    author.textContent = `by ${book.author}`;
-    const numberOfPages = document.createElement("p");
-    numberOfPages.textContent = `${book.numberOfPages} pages`;
-    const bookStatus = document.createElement("p");
-    bookStatus.textContent = "read?";
-    const spanStatus = document.createElement("span");
-    if (book.hasBeenRead) {
-      spanStatus.textContent = " yes";
-      spanStatus.classList.add("read");
-    } else {
-      spanStatus.textContent = " no";
-      spanStatus.classList.add("not-read");
-    }
-    bookStatus.appendChild(spanStatus);
-    descContainer.appendChild(author);
-    descContainer.appendChild(numberOfPages);
-    descContainer.appendChild(bookStatus);
-
-    cardInfo.appendChild(bookName);
-    cardInfo.appendChild(descContainer);
-
-    const buttons = document.createElement("div");
-    buttons.classList.add("btns");
-    const changeStatusBtn = document.createElement("button");
-    changeStatusBtn.classList.add("btn", "changeStatus-btn");
-    changeStatusBtn.textContent = "Mark as read";
-    changeStatusBtn.addEventListener("click", (event) => {
-      const bookStatusSpan = newCard.querySelector("span");
-      book.changeStatus();
-      if (book.hasBeenRead) {
-        bookStatusSpan.classList.remove("not-read");
-        bookStatusSpan.textContent = " yes";
-        bookStatusSpan.classList.add("read");
-      } else {
-        bookStatusSpan.classList.remove("read");
-        bookStatusSpan.textContent = " no";
-        bookStatusSpan.classList.add("not-read");
-      }
-    });
-
-    const removeBtn = document.createElement("button");
-    removeBtn.classList.add("btn", "remove-btn");
-    removeBtn.textContent = "Remove";
-    removeBtn.addEventListener("click", (event) => {
-      container.removeChild(newCard);
-      const title = container.querySelector(".title");
-      booksArr = booksArr.filter((book) => book.title !== title.textContent);
-    });
-
-    buttons.appendChild(changeStatusBtn);
-    buttons.appendChild(removeBtn);
-    newCard.appendChild(cardInfo);
-    newCard.appendChild(buttons);
-
-    container.appendChild(newCard);
+    addBook(book);
   }
+}
+const form = document.querySelector("form");
+form.addEventListener(
+  "submit",
+  (event) => {
+    const bookName = document.querySelector("#book-name");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+    const bookStatus = document.querySelector("#book-status");
+    booksArr.push(
+      new Book(bookName.value, author.value, pages.value, bookStatus.value)
+    );
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+    event.target.reset();
+    addBook(booksArr[booksArr.length - 1]);
+    event.preventDefault();
+  },
+  false
+);
+function addBook(book) {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  const cardInfo = document.createElement("div");
+  cardInfo.classList.add("info");
+
+  const bookName = document.createElement("p");
+  bookName.textContent = book.title;
+  bookName.classList.add("title");
+
+  const descContainer = document.createElement("div");
+  descContainer.classList.add("desc");
+  const author = document.createElement("p");
+  author.textContent = `by ${book.author}`;
+  const numberOfPages = document.createElement("p");
+  numberOfPages.textContent = `${book.numberOfPages} pages`;
+  const bookStatus = document.createElement("p");
+  bookStatus.textContent = "read?";
+  const spanStatus = document.createElement("span");
+  if (book.hasBeenRead) {
+    spanStatus.textContent = " yes";
+    spanStatus.classList.add("read");
+  } else {
+    spanStatus.textContent = " no";
+    spanStatus.classList.add("not-read");
+  }
+  bookStatus.appendChild(spanStatus);
+  descContainer.appendChild(author);
+  descContainer.appendChild(numberOfPages);
+  descContainer.appendChild(bookStatus);
+
+  cardInfo.appendChild(bookName);
+  cardInfo.appendChild(descContainer);
+
+  const buttons = document.createElement("div");
+  buttons.classList.add("btns");
+  const changeStatusBtn = document.createElement("button");
+  changeStatusBtn.classList.add("btn", "changeStatus-btn");
+  changeStatusBtn.textContent = "Mark as read";
+  changeStatusBtn.addEventListener("click", (event) => {
+    const bookStatusSpan = newCard.querySelector("span");
+    book.changeStatus();
+    if (book.hasBeenRead) {
+      bookStatusSpan.classList.remove("not-read");
+      bookStatusSpan.textContent = " yes";
+      bookStatusSpan.classList.add("read");
+    } else {
+      bookStatusSpan.classList.remove("read");
+      bookStatusSpan.textContent = " no";
+      bookStatusSpan.classList.add("not-read");
+    }
+  });
+
+  const removeBtn = document.createElement("button");
+  removeBtn.classList.add("btn", "remove-btn");
+  removeBtn.textContent = "Remove";
+
+  buttons.appendChild(changeStatusBtn);
+  buttons.appendChild(removeBtn);
+  newCard.appendChild(cardInfo);
+  newCard.appendChild(buttons);
+
+  removeBtn.addEventListener("click", (event) => {
+    const title = newCard.querySelector(".title");
+    container.removeChild(newCard);
+    booksArr = booksArr.filter((book) => book.title !== title.textContent);
+  });
+  container.appendChild(newCard);
 }
